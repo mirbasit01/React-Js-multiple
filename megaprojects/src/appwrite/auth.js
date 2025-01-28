@@ -1,5 +1,5 @@
 import { cloneElement } from "react";
-import conf from "../conf/config";
+import conf from "../conf/conf";
 import { Client, Account, ID } from "appwrite";
 
 export class AuthService {
@@ -58,7 +58,7 @@ export class AuthService {
             }
         }
 
-        
+
 }
 
 const authService = new AuthService();
