@@ -5,6 +5,8 @@ import './App.css'
 import Post from './Copmonets/Post'
 
 function App() {
+
+  console.log(import.meta.env.VITE_APPWRITE_URL)
   const [count, setCount] = useState(0)
 
   return (
