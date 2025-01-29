@@ -1,5 +1,4 @@
-import { cloneElement } from "react";
-import conf from "../conf/conf";
+ import conf from "../conf/conf";
 import { Client, Account, ID } from "appwrite";
 
 export class AuthService {

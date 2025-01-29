@@ -1,20 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Post from './Copmonets/Post'
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import authService from './appwrite/auth'
+import {login, logout} from './store/authslice'
+import { Footer, Header } from './Copmonets'
+import { Outlet } from 'react-router-dom'
 
-function App() {
+const App = () => {
 
-  console.log(import.meta.env.VITE_APPWRITE_URL)
-  const [count, setCount] = useState(0)
+ const [Loading, setLoading] = useState(true)
+ const dispatch = useDispatch()
 
-  return (
-    <>
-      
-      <Post/>
-    </>
-  )
+
+ useEffect(() => {
+     authService.getCurrentUser()
+     .then((userData) => {
+       if(userData){
+          dispatch(login({userData}))
+       } else{
+          dispatch(logout())
+       }
+     })
+     .finally(() => {
+        setLoading(false)
+     })
+ }, [ ])
+ 
+ return !Loading ? (
+  <div style={{ minHeight: '100vh', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', backgroundColor: 'gray' }}>
+    <div style={{ width: '100%', display: 'block' }}>
+       <Header/>
+
+       <main>
+      {/* <Outlet/> */}
+       </main>
+       <Footer/>
+    </div>
+   </div>
+ ) : null
+
+
+  // return (
+  //    <>
+
+  //    </>
+  // )
 }
 
 export default App
